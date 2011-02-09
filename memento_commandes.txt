@@ -1,5 +1,5 @@
-Ci-dessous la liste des commandes,leurs fonctions et leurs syntaxes :
--------------------------------------------------------------------------------------------
+LISTES DE COMMANDES UTILES ET LEUR SYNTAXE:
+===============================
 
 cd
 Permet de naviguer dans les répertoires
@@ -20,7 +20,7 @@ ls -l # liste en détaille tous les fichiers (permissions d'accès, le nombre de
 ls -ld # pour les répertoires
 ll ou ls -i # liste en détaille tous les fichiers cachés ou pas
 ls -R # affiche l'arborescence d'un répertoire
-
+ls -d # affiche les noms de répertoires plutôt que leur contenu
 more
 affiche le contenu d'un fichier page par page
 Syntaxe:
@@ -152,12 +152,11 @@ cut -s # supprime
 
 
 
+ASTUCES
+======
 
-
-
-Astuces
-Les options :
 Le tunnel
+-----------
 |
 Sert a rediriger la sortie d'un programme vers un autre
 Syntaxe:
@@ -167,6 +166,7 @@ Lorsque la sortie de la commande ls est trop nombreux pour être contenu dans la
 ls | less
 
 La redirection:
+------------------
 >
 l'utilisation du caractère «>» permet de rediriger la sortie d'une commande située
 à gauche vers le fichier situé à droite
@@ -176,5 +176,96 @@ ls -al /home/hk/ > toto.txt
 L'emploi d'un double caractère «>>» permet de concaténer la sortie  vers le fichier, c'est-
 à-dire ajouter la sortie à la suite du fichier, sans l'écraser.
 
+
+RACCOURCIS
+========
+Dans le shell:
+crtl+a ==> allez en début de ligne
+crtl+e ==> allez en fin de ligne
+echap+d ==> supprime un mot
+crtl+r ==> cherche dans l'historique des commandes
+
+
+
+
+UTILISATION DE GIT
+===========
+
+Configuration:
+-----------------
+La premiere chose à faire c'ets de configurer le nom et l'adresse mail que GIt utilisera pour signer les commits:
+
+git config --global user.name "le_nom"
+git config --global user.email "adresse@email.com"
+Le fichier de configuration est:~/.gitconfig
+
+UTILISATION BASIQUE
+=============
+On a 2 choix,soit cloner un depot qui existe deja, soit en initialisant un  depot depuis un dossier vide.
+
+Cloner un dépot:
+---------------------
+On a besoin de connaitre l'adresse URL Git du projet, il peut etre en local ou sur internet
+Exemple commande : ( il faut d'abord se placer dans le dossier ou l'on veut copier le depot)
+Par le protocole GIT:
+git clone git://git.kernel.org/pub/scm/git/git.git
+
+Par http:
+git clone http://www.kernel.org/pub/scm/git/git.git
+
+ou en local
+git clone /home/terafc/todolist
+
+Initialiser un depot:
+------------------------
+mkdir un_dossier
+cd un_dossier
+git init
+git add file1 file2 file3 # ajoute des fichiers au dépot
+
+On peut maintenant  faire un commit. On peut verifier ce qui va etre commité avec:
+git diff --cached # l'option --cached permet de voir toutes les modifications meme avant un commit
+git status # Permet de voir la situation des fichiers
+
+git commit # permet de commiter
+
+Pour la suite avant de commiter il est necessaire de renvoyer les fichiers avec la commande "git add" mais cette commande de passer outre:
+git commit -a
+# l'option -m permet de rajouter un commentaire :
+Exemple:
+git commit -a -m "le_commentaire"
+
+Lorsqu'on veut envoyer les mises à jour apres un commit sur un/le serveur du depot on peut faire la commande:
+
+git push lien_vers_le_serveur
+Exemple pour github:
+
+git push git@github.com:terafc/le_depot.git
+
+
+Au contraire lorsqu'on veut récuperer des mises a jour depuis un/le serveur de depot on fait la commande:
+
+git pull git@github.com:terafc/le_depot.git
+ / \ est différent 
+/ ! \ Dans les deux cas il faudra d'abord se placer dans le dossier où sont/on veut stocker les mises à jours
+
+Dans le cas du premier push ou que l'ordinateur d'où l'on veut télecharger ou envoyer les fichiers  est différent , il est possible qu'une clé publique RSA soit demandé. Dans ce cas il faut copier le contenu du fichier: ~/.ssh/id_rsa.pub sur le serveur pour accepté l'ordinateur.
+
+Si ce fichier n'existe pas il faudra le générer avec la commande :
+ ssh-keygen -t -C 
+, ne pas attribuer de nom précis, et donner un mot de passe privé et copier le contenu du fichier géneré (~/.ssh/id_rsa.pub ) sur le serveur.
+
+USAGE BASIQUE DES BRANCHES ET DES MERGES
+=============================
+
+git branch nom_nouvelle_branche
+# Permet de crée une nouvelle branche
+
+git checkout nom_nouvelle_branche
+# permet de passer sur cette nouvelle branche
+
+Il est alors conseillé de préciser lorsqu'on veut faire un push ou un pull  de préciser quel est la branche désiré:
+git push origin branch1
+git push origin branch2
 
 
