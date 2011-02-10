@@ -1,0 +1,178 @@
+**LISEZMOI
+**auteur: MARCOZ Francel
+**email:terafc@gmail.com
+
+Exercice 2
+1.Création du fichier 'premiertexte' avec la commande 'touch'
+
+2.Visualisation du fichier 'premiertexte' avec la commande 'cat premiertexte'
+
+3. La taille du fichier est de 23 octets avec la commande 'ls -l premiertexte'
+
+Exercice 3
+1. Copie de 'premiertexte' en 'double' avec la commande 'cp premiertexte double'
+
+2. Les deux fichiers ont la même taille, c'est à dire 23 octets
+
+3. Rénommination du fichier 'double' en 'introduction' avec la commande 'mv double introduction'
+
+4. 'mv double introduction' renomme le fichier 'double' en 'introduction'. 'cp double introduction' copie le contenu du fichier 'double' dans le fichier 'introduction' en remplacant tous les caracteres par celui du fichier 'introduction' 
+
+Exercice 4
+
+1. Création du repertoire 'essai' avec la commande 'mkdir essai'
+
+2. Déplacement du fichier 'introduction' dans le repertoire 'essai' avec la commande 'mv introduction essai/'
+
+3. Copie de 'premiertexte' en 'copie' avec la commande 'cp premiertexte copie' et déplacement dans le dossier 'essai' avec la commande 'mv copie essai/'
+
+4. Affichage de ce que contient essai/ avec la commande 'ls essai/'
+
+Exercice 5
+
+1. Echec de la tentative de destruction de essai/ avec la commande 'rmdir essai/' car le dossier n'est pas vide
+
+2. Déstruction de tout ce que contient essai/ avec la commande 'rm essai/*'
+
+3. Déstruction de essai/ avec la commande 'rm -r essai/'
+
+Exercice 6
+
+1. L'option -R de ls affiche récursivement, c'est à dire  l'arborescence d'un repertoire
+
+2. Les fichiers et repertoires sont classés par ordre de parenté pour les répertoire et par order alphabétique pour. Les options pour modifier les criteres de classement sont: -X par extension;  -S par taille, -t par date de modification, -v par version.
+
+3. Affichage du contenu du repertoire personnel trier par date de modification avec la commande 'ls -t ~/'.
+
+4. Affichage des droits du répertoire Documents avec la commande 'ls -l'. 
+Résultat : 'drwxr-xr-x' . 'd' veut dire 'directory' pour répertoire, 'r' veut dire 'read' pour le droit de lecture du dossier, 'w' veut dire 'write' pour le droit d'écriture et 'x' veut dire 'execution' pour le droit d'éxecution.
+ Le résultat est composé de 7 caracteres, le premier caractere à partir de la droite indique le type de fichier, ici il s'agit donc d'un répertoire. Les 3 prochaines caracteres (wxr ici) indique les droits du propriétaire sur ce repertoire, ici le propriétaire a ont les droits d'éxécution, d'écriture et de lecture. Les 3 caracteres suivants indique les droits du groupe propriétaire du repertoire sur ce repertoire. Ici le groupe propriétaire ont donc le droit ici les droits d'éxecution et de lecture. Les 3 derniers caracteres indique les droits pour les autres utilisateurs, ici (r-x) les droits sont de lecture et d'éxecution.
+
+5. La commande 'ls -l' liste en détail le contenu d'un dossier (permissions d'accès, le nombre de liens physiques, le nom du propriétaire et du groupe, la taille en octets, et la date de création)
+
+6. La commande 'ls -l -d' affiche les droits d'un répertoire donné
+
+7. L'option '-F' permet d'afficher le contenu d'un repertoire avec des signes distinctifs qui permettent d'identifier les types de fichiers
+
+8. Un répertoire a les droits suivants: drwx--x--x, en étant pas propriétaire du répertoire, donc un simple utilisateur, on n'a pas de droit d'écriture, ni de lecture donc on ne peut afficher le contenu.
+
+Exercice 7  
+
+1. Création de 3 répertoires en une seule ligne de commande avec la commande 'mkdir rep1 rep2 rep3'. rep1, rep2 et rep3 étant les 3 répertoires.
+
+2. Déstruction de ces 3 répertoires en une seule de commande avec la commande 'rmdir rep1 rep2 rep3'
+
+3. Lorsqu'on tape tape la commande 'mkdir mkdir' on crée un dossier mkdir
+
+4. Il faut taper la commande 'rm -r bla/'
+
+5. Oui mkdir peut prendre des options comme l'option -m, -p, -v.
+
+6. La commande 'mkdir Rapport/annexes' peut effectivement crée le sous répertoire si le repertoire 'Rapport/' existe deja.
+
+7. L'option '-p' de mkdir permet à de créer à la fois un répertoire et un sous-répertoire de ce repertoire
+
+8. l'option '-m' de mkdir permet de créer un répertoire en spécifiant les droits
+
+9. Cette commande aura pour effet de supprime toute l'arborescence toto/tata/tutu/
+
+10 Si toto/ n'existe pas , la commande 'mkdir -p toto/tutu/' devrait à la fois créer le repertoire toto/ et tutu/
+     Si toto/ existe, la commande 'mkdir toto/tutu/' devrait  créer le repertoire tutu/ dans toto/
+
+Exercice 8 
+Commande cp 
+
+1. Oui c'est possible avec l'option '-r' de cp
+
+2. Lorsqu'on essaie de faire la copie cela nous renvoie une erreur
+
+3. Lorsqu'on copie un fichier dans un repertoire où il existe un fichier de meme nom, cela remplace le fichier de meme nom par celui que l'on copier
+
+4. Oui c'est possible, cela aura pour effet de copier les fichiers 'fichier1', 'fichier2' et 'fichier3' dans le repertoire 'repertoire/'
+
+Commande mv
+
+1. Si fichier2 existe deja la commande 'mv fichier1 fichier2' ecrasera le contenu de fichier2 par le contenu de fichier1
+
+2. La commande 'mv bla blo' permet de renommer blan en blo. Si le répertoire blo existe deja alors cette commande deplace le repertoire bla dans le repertoire blo
+
+3. Pour déplacer un fichier et le renommer à la fois on entre la commande suivante:
+mv fich1 rep/fich2 où fich1 est le fichier à renommer rep/ est le répertoire de déstination et fich2 le nouveau nom.
+Si le fichier existe deja celui-ci est écrasé par le fichier à déplacer
+
+4. De meme pour déplacer un répertoires dans un répertoires et le renommer à la fois on entre la commande suivante:
+mv rep1/ rep2/rep3  où rep1/ est le répertoire à renommer et à déplacer, rep2/ est le répertoire de destination et rep3/ le nouveau nom du rep1
+
+5. L'option -i demande la confirmation de l'utilisateur avec d'écraser alors que l'option -f force l'écrasement sans demander la confirmation.
+
+Exercice 9
+
+1.Création du répertoire Year avec 'mkdir year'
+
+2.	ls *5 liste tous les fichier se terminant par5
+	ls annee4* liste tous les fichiers commencant par annee4
+	ls annee4? liste tous les fichiers commencent par annee4 de 7 lettres maximum
+	ls annee[!0-9]*
+	ls *ana* liste tous les fichiers  contenant la chaine de caractere ana
+	ls  -[aA]* liste tous les fichiers commencant par a ou A
+
+3. cp *[41]? /tmp copie les fichiers dont l'avant dernier caractère est un 4 ou 1 dans le répertoire /tmp en une seule commande.
+
+Exercice 10
+
+1. La commande find -name "[aA][a-z 0-9]*[3-9]" cherche tous les fichiers dont les noms commençant par un «a» majuscule ou
+une minuscule, suivi d'éventuellement quelques lettres ou chiffres, et se terminent par un chiffre entre 3 et 6
+
+2. La commande :
+	find -mtime +30 pour rechercher qui a été modifié il y a plus de 30 jours
+	find -mtime 30 pour rechercher qui a été modifié il y a  de 30 jours
+	find -mtime -30 pour rechercher qui a été modifié il y a moins de 30 jours
+
+3.L'option "-newer" permet de dire que le fichier recherché a  été modifié plus récemment qu'un autre fichier donné
+
+4.L'option  "-type d" permet de spécifier que le fichier recherché est un répertoire
+
+5.L'option "-size n[unité]" permet d'indiquer que le fichier recherché a une  donnée.
+ Exemple , la commande :
+find -size +32M permet de trouver tous les fichiers dont la taille est supérieur a 32 méga-octets
+De meme :
+find -size -15K permet de trouver tous les fichiers dont la taille est inférieur a 15 kilo-octets
+
+Exercice 12
+
+1.Création du répertoire essai_droit
+
+
+2. Création du fichier droit 
+-Apres la commande 1 c'est à dire "chmod 751 essai_droit", il est impossible d'accéder au répertoire cependant il est possible de faire ls et de modifier le fichier droit.
+
+-Apres la commande 2, c'est à dire "chmod 512 essai_droit", il est impossible d'accéder au répertoire cependant il est possible de faire ls et de modifier le fichier droit.
+
+-Apres la commande 3, c'est à dire "chmod 214 essai_droit", il est impossible d'accéder au répertoire, ni de faire un ls, ni d'accéder au fichier droit
+
+-Apres la commande 4, c'est à dire "chmod 150 essai_droit"
+
+
+3.Le maximum de droit que l'on peut attribué a un dossier est 777 et sur un fichier 666.
+Pour que lors de leur création les répertoires aient par défaut les droits 640 on effectue l'opération de soustraction 777-640=027 et on applique le reste à la commande umask. C'est à dire "umask 027.
+
+De meme pour les fichiers on effectur l'opération 666-640=026 et on applique le reste à la commande umask. C'est à dire "umask 026"
+
+
+Exercice 13
+
+1. La commande "chmod g+w fic1" permet à tous ceux du groupe d'écrire dedans
+
+2. La commande "chmod ugo+x le_srcipt" permet de donner à tous les utilisateurs d'un fichier script les droits d'éxécution.
+
+3. La commande  "chmod u-wx toto" permet de donner au propriétaire que les droits de lecture
+
+4.  La commande "chmod go+wx toto" permet de donner les même droit que le propriétaire aux utilisateurs et aux autres utilisateurs
+
+5. L'option "-R" permet de modifier récursivement les droits d'un répertoire et des fichiers qu'il contient.
+
+6.L'option "-m" de mkdir permet de créer un répertoire en spécifiant les droits sur ce répertoire.
+
+7.
+
+

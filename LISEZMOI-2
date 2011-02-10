@@ -1,0 +1,109 @@
+open**LISEZMOI
+**auteur: MARCOZ Francel
+**email:terafc@gmail.com
+
+Utilisation des systemes d'exploitation des ordinateurs
+
+TP-2: Tubes et processus
+
+1. Commandes composées
+-----------------------------------
+
+Exercice 1 : enchainement
+
+a. La commande:
+ head -5 /usr/include/stdio.h && tail -5 /usr/include/stdio.h permet d'afficher les 5 premieres puis les 5 dernieres lignes du fichier /usr/include/stdio.h
+
+b. La commande head -7 /usr/include/stdio.h | tail -1 affiche la 7eme ligne du fichier /usr/include/stdio.h
+
+Exercice 2: Tubes
+
+a. La commande:
+"ls /usr/include/ | grep -c z" ou "ls -d /usr/include/*z* | wc -l" affiche le nombre de fichiers de /usr/include dont le nom contient la lettre z
+
+b. La commande cat /etc/passwd | tr / X affiche le fichier /etc/passwd, en remplacant les caracteres / par des X
+
+c. cat /etc/passwd | tr / X | more affiche le fichier /etc/passwd page par page, en remplacant les caracteres / par des X
+
+d. La commande ls -p | grep /  liste uniquement les sous-répertoires du répertoire courant
+
+
+Exercice 3: cut, sort, uniq et tubes
+
+a. La commande:
+	cut -d: -f7 /etc/passwd | sort | uniq | wc -l affiche le nombre d'intérpreteurs de commande différents mentionnés dans le 7eme champs /etc/passwd
+
+c. La commande "sort"permet de trier par ordre alphabéthiques de noms le repertoire téléphonique
+
+d.La commande :
+	cat telephone.txt | grep -c [0-9] permet d'afficher le nombre de numeros de téléphones dans le répertoires
+	L'option "c" de grep permet de compter les lignes correspondant au motif recherché.
+
+e. La commande:
+	cat telephone.txt | grep Dupond n'affiche que les lignes concernant les Dupond
+
+f. La commande:
+	cat telephone.txt | grep -v Dupond affiche les lignes ne concernant pas les Dupond
+	l'option "v" effectue une recherche inversé, c'est à dire qu'il ne recherche que les lignes ne correspondant pas au motifs recherché
+
+g. La commande:
+	cat telephone.txt | grep -m1 Dupond | cut -f3 affiche le numéro de téléphone (sans le nom) du premier Dupond apparaissant dans le répertoire téléphonique
+   	 
+g. La commande:
+	cat telephone.txt | grep -m1 Dupond | cut -f3 affiche le numéro de téléphone (sans le nom) du premier Dupond apparaissant dans le répertoire téléphonique
+	L'option "mn" de grep permet d'arreter la recherche du motif recherché à partir de la n ieme ligne
+	L'option "fn" de cut n'affiche qu'un champs particulier où n et le numéro du champs
+
+h. La commande: 
+	cat telephone.txt | sort -k2 | grep -m1 Dupond | cut -f3 affiche le numéro de téléphone (sans le nom) du premier Dupond dans l’ordre alphabétique (sur les prénoms).
+	L'option "k" de sort permet de trier que la position voulu.
+
+
+2. Gestion des processus
+---------------------------------
+ a.  Lancement de gedit au premier plan avec la commande "gedit", mise en pause de gdit avec CRTL+Z et enfin dans le meme terminal, mise en arriere plan de gedit avec la commande  "bg gedit"
+
+b.L'option "-l" de la commande ps affiche en détaille des information sur un processus donné ( le UID, le PID, le PPID...).Le processus père du processus correspodant à gedit est le processus bash.
+
+c. L'option de ps "A" affiche tous les processus et l'option "f" permet d'afficher le format complet du processus.
+  
+ Les processus sont identifiant par le TTY, lorsqu'il s'agit du terminal cela correspond a :"pts/n" où n est le numéro du terminal ouvert.
+   
+   La commande "kill -a PID" , où PID est l'identifiant du terminal à tuer, tue tous les processus de ce terminal.
+
+d. Son processus père est celui du terminal car le gedit a comme PPID le PID du terminal. En tuant le processus le terminal on ne peut plus accéder à gedit. On peut en déduire donc que le processus fils dépend donc du processus parent. gedit n'a plus de processus père car il a été tuer.
+
+Exercice 1 : Taches de fonds
+
+a. Lancement de evince en tache de fond avec "evince&"
+b. Lancement de gedit en tache de fond avec "gedit&"
+c. Lancement de evince en avant plan avec "evince" et mise en pause avec CRTL+Z
+d. La commande "jobs" affiche les trois processus lancé précedement avec leur état :
+	Le premier processus evince est  en en "running" car il est toujours actif
+	Le pocessus gedit en en "running" car il est actif
+	Le second processus evince est "stopped" car il a été suspendu
+
+e. Mise en tache de fond de evince avec la commande " bg 3" car le numéro de ce processus est 3
+
+f. L'affichage des processus montre bien qu'evince a été mise en tache de fond  grâce à la présence du suffixe "&" sur ce processus
+
+g.  Remise au premier plan de evince avec la commande "fg 3" , car le numéro
+ 
+Exercice 2 : Caractérisque des processus
+-----------------------------------------------------
+
+a. Affichage des processus avec la commande "ps"
+
+b.Affichage des processus avec la commande "top"
+
+c.  Il est possible de trier cette liste selon la consommation de mémoire en tapant la commande "top" puis SHIFT+M
+
+d. Par défaut la commande "top" affiche la liste selon la consommation du processeur.
+
+e. La commande "top user" où user est mon nom d'utilisateur affiche uniquement mes processus.
+
+
+
+
+
+
