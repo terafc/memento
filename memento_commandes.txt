@@ -252,7 +252,7 @@ git pull git@github.com:terafc/le_depot.git
 Dans le cas du premier push ou que l'ordinateur d'où l'on veut télecharger ou envoyer les fichiers  est différent , il est possible qu'une clé publique RSA soit demandé. Dans ce cas il faut copier le contenu du fichier: ~/.ssh/id_rsa.pub sur le serveur pour accepté l'ordinateur.
 
 Si ce fichier n'existe pas il faudra le générer avec la commande :
- ssh-keygen -t -C 
+ ssh-keygen -t rsa
 , ne pas attribuer de nom précis, et donner un mot de passe privé et copier le contenu du fichier géneré (~/.ssh/id_rsa.pub ) sur le serveur.
 
 USAGE BASIQUE DES BRANCHES ET DES MERGES
