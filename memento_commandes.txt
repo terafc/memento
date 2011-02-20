@@ -123,7 +123,11 @@ Utile:
 grep -i  #cherche un caractère sans tenir compte de la casse
 grep -n # cherche un caractère et affiche les numéros des lignes où il apparait
 grep -c # affiche le nombre de ligne dans lequel le caractère recherche apparait
-
+grep -v # fais une recherche inversée, affiche tous sauf ce qui est précisé
+grep -l # affiche les noms des fichiers où figure au moins une fois le mot chercher
+grep -L #affiche les noms des fichiers où ne figure pas le mot rechercher
+grep -mn # permet d'arreter la recherche apres avoir trouvé n ligne qui correspond à la recherche
+grep '\(mot1\|mot2\)' # cherche les caracteres mot1 et mot2 séparement
 
 cat
 Affiche le contenu d'un fichier
@@ -141,13 +145,26 @@ top -u utilis1 #affiche les processus de l'utilisateur 'utilis1'
 cut
 Affiche des parties sélectionnées des lignes de chaque fichier
 Utile
+l'option -d permet de fixer un délimiteur pour les champs
 cut -d : fichier # va considérer qu'un champs dans la ligne est séparé par des ":"
-cud -d / fichier # va considérer qu'un champs dans la ligne est séparé par des ":"
+cud -d / fichier # va considérer qu'un champs dans la ligne est séparé par des "/"
 !!Par défaut le délimiteur est une tabulation
-cut -fn #sélectionne que le champs numéro n d'une ligne et n'affiche pas le reste
+-f : permet de selectionner les champs ou le champs qu'on veut
+cut -fn #sélectionne que les n premiers champs d'une ligne et n'affiche pas le reste
 cut -s # supprime
 
+sort
+Trie les lignes des fichiers texte, par défaut il trie selon le nom
+Utile
+-g : permet de comparer selon la valeur numérique des caracteres
+-n : permet de comparer selon la valeur numérique de la chaines
 
+uniq
+Signal ou élimine les lignes répétées ( supprime les doublons)
+Utile
+-c : permet de compter les lignes répétées
+-d : n'affiche que le lignes dupliquées
+-u : n'affiche pas les lignes uniques
 
 
 
