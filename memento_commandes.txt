@@ -166,13 +166,7 @@ Utile
 -d : n'affiche que le lignes dupliquées
 -u : n'affiche pas les lignes uniques
 
-ln
-Créer des liens entre des fichiers
-Utile
-Syntaxe :
-ln destination  source
-ln -s /opt/lampp/lampp /usr/bin/lampp
-# crée un lien symbolique du fichier lampp dans le repertoire /opt/lampp vers le fichier lampp dans le répertoire /usr/bin/
+
 
 
 ASTUCES
@@ -216,7 +210,7 @@ UTILISATION DE GIT
 
 Configuration:
 -----------------
-La premiere chose à faire c'ets de configurer le nom et l'adresse mail que Git utilisera pour signer les commits:
+La premiere chose à faire c'ets de configurer le nom et l'adresse mail que GIt utilisera pour signer les commits:
 
 git config --global user.name "le_nom"
 git config --global user.email "adresse@email.com"
@@ -239,8 +233,6 @@ git clone http://www.kernel.org/pub/scm/git/git.git
 ou en local
 git clone /home/terafc/todolist
 
-git clone --bare # l'option --bare permet de cloner un depot éxistant en considéranr le clone un dépot réferentiel nu.
-
 Initialiser un depot:
 ------------------------
 mkdir un_dossier
@@ -260,21 +252,17 @@ git commit -a
 Exemple:
 git commit -a -m "le_commentaire"
 
-Lorsqu'on veut envoyer les mises à jour apres un commit sur un serveur de depot on peut faire la commande:
+Lorsqu'on veut envoyer les mises à jour apres un commit sur un/le serveur du depot on peut faire la commande:
 
 git push lien_vers_le_serveur
-#  Il peut etre nécessaire de préciser le nom de la branche avec :
-git push nom_branch lien_vers_serveur
-
 Exemple pour github:
 
 git push git@github.com:terafc/le_depot.git
 
 
-Au contraire lorsqu'on veut récuperer des mises a jour depuis un serveur de depot on fait la commande:
+Au contraire lorsqu'on veut récuperer des mises a jour depuis un/le serveur de depot on fait la commande:
 
 git pull git@github.com:terafc/le_depot.git
-
  / \ est différent 
 / ! \ Dans les deux cas il faudra d'abord se placer dans le dossier où sont/on veut stocker les mises à jours
 
@@ -293,8 +281,8 @@ git branch nom_nouvelle_branche
 git checkout nom_nouvelle_branche
 # permet de passer sur cette nouvelle branche
 
-Il est alors conseillé de préciser lorsqu'on veut faire un push ou un pull quel est la branche désiré:
+Il est alors conseillé de préciser lorsqu'on veut faire un push ou un pull  de préciser quel est la branche désiré:
 git push origin branch1
-git pull origin branch2
+git push origin branch2
 
 
