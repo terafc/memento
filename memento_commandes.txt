@@ -64,7 +64,7 @@ Syntaxe:
 cp fichier1 /répertoire1 # copie le fichier 1 dans le répertoire1
 cp /répertoire1 répertoire2/ # copie le répertoire1 dans le répertoire2 ( ATTENTION "/" à la fin)
 Utile:
-cp -i # Demande une confirmation avant d'écraser sil existe un fichier ou répertoire de même nom
+cp -i # Demande une confirmation avant d'écraser s'il éxiste un fichier ou répertoire de même nom
 cp -a # copie en gardant les droits,propriétaire,dates
 cp -R #copie récursivement ( grâce a cette commande on peut copier un fichier sous un autre nom)
 
@@ -106,7 +106,7 @@ tar czvf test.txt test.tgz # archive et compresse (avec la compression Gzip) le 
 Dés-archiver:
 tar xzvf test.tgz # dés-archive le contenu de l'archive test.tgz
 Utile:
-tar  tzvf test.tgz # vérifie/affiche le contenu de l'archive test.tgz
+tar tzvf test.tgz # vérifie/affiche le contenu de l'archive test.tgz
 
 uname
 Permet de savoir le nom du noyau
@@ -166,11 +166,16 @@ Utile
 -d : n'affiche que le lignes dupliquées
 -u : n'affiche pas les lignes uniques
 
+find
+Recherche des fichiers
+utile
+find /tmp -name noyau -type f -print # affiche les fichiers qui s'appellent noyau dans le répertoire /tmp
+
 ln
 Créer des liens entre des fichiers
 Utile
 Syntaxe :
-ln destination  source
+ln source destination
 ln -s /opt/lampp/lampp /usr/bin/lampp
 # crée un lien symbolique du fichier lampp dans le repertoire /opt/lampp vers le fichier lampp dans le répertoire /usr/bin/
 
@@ -199,15 +204,30 @@ ls -al /home/hk/ > toto.txt
 L'emploi d'un double caractère «>>» permet de concaténer la sortie  vers le fichier, c'est-
 à-dire ajouter la sortie à la suite du fichier, sans l'écraser.
 
+Gestion processus
+------------------------
+Trouver le PID d'un application a partir de son nom ou une partie de son nom :
+
+ps -ef | grep -i nom_prog
+
+Afficher processus qui tourne en root :
+ps -U root -u root u
+ou
+top -u root
 
 RACCOURCIS
 ========
 Dans le shell:
+q ==> quitter une page dans la console, exemple page man
+crtl+c ==> quitte une application dans la console
+crtl-z ==> met en pause une application dans la console
 crtl+a ==> allez en début de ligne
 crtl+e ==> allez en fin de ligne
 echap+d ==> supprime un mot
 crtl+r ==> cherche dans l'historique des commandes
-
+crtl+r ==> permet aussi de remonter dans les correspondance cherché dans l'historique
+crtl+s ==> permet de redescendre
+crtl+k ==> supprime tous les mots situés apres le curseur
 
 
 
@@ -283,7 +303,8 @@ Dans le cas du premier push ou que l'ordinateur d'où l'on veut télecharger ou 
 Si ce fichier n'existe pas il faudra le générer avec la commande :
  ssh-keygen -t rsa
 , ne pas attribuer de nom précis, et donner un mot de passe privé et copier le contenu du fichier géneré (~/.ssh/id_rsa.pub ) sur le serveur.
-
+ssh-keygen -t rsa -C "your_email@youremail.com"
+ permet de generer une clé pour votre adresse e-mail
 USAGE BASIQUE DES BRANCHES ET DES MERGES
 =============================
 
