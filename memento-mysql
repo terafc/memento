@@ -1,0 +1,73 @@
+Se connecter a une base de donnée:
+=================================
+MYSQL adresse_de_la_base -h -u le_login -p;
+
+Créer une base:
+===============
+CREATE DATABASE <nom base>;
+
+Lister les bases:
+================
+SHOW DATABASES;
+, descript
+Utiliser la base:
+================
+USE <nom base>;
+
+Lister les tables d'une base:
+=============================
+SHOW TABLES;
+
+Regarder a l'interieur d'une table:
+===================================
+DESCRIBE <nom table>;
+
+Créer une table:
+================
+CREATE TABLE <nom table> (<nom colonne1 TYPE(TAILLE), <nom colonne2> TYPE(TAILLE),primary key(<nom colonne> );
+
+//Pour ajouter une colonne a une table deja crée:
+--------------------------------------------------
+ALTER TABLE <nom table> ADD <nom colonne> TYPE(TAILLE);
+
+//Pour suppimer une colonne d'une table:
+-----------------------------------------
+ALTER TABLE Nom_de_la_table DROP Nom_de_la_colonne
+
+//Pour modifier une colonne:
+----------------------------
+ALTER TABLE Nom_de_la_table MODIFY Nom_de_la_colonne Type_de_donnees
+
+//Renommer une colonne:
+----------------------
+ALTER TABLE nom_table CHANGE ancien_nom_colonne new_nom_colonne TYPE(TAILLE);
+
+//Pour supprimer la/les clé primaire  d'une table qui est deja crée:
+--------------------------------------------------------------------
+ALTER TABLE <nom table> drop primary key;
+
+//Pour ajouter/redéfinir une clé primaire à une table deja crée:
+----------------------------------------------------------------
+ALTER TABLE <nom table> DROP PRIMARY KEY,ADD PRIMARY KEY (<nom colonne1>,<nom colonne2>);
+
+Inserier dans une table:
+=======================
+INSERT INTO <nom table> VALUES ( 'valeur_pour_colonne1', 'valeur_pour_colonne2');
+
+Modifier,mettre à jour une table:
+================================
+UPDATE nom_table SET nom_colonne_a_modifier='la_nouvelle_valeur' where nom_colonne2='autre_valeur_correspondant';
+
+Supprimer une table:
+====================
+DROP TABLE nom_de_la_table;
+
+Renommer un table:
+==================
+RENAME TABLE Ancien_Nom TO Nouveau_Nom;
+
+
+MANIPULATION BASE DE DONNEE
+===========================
+
+

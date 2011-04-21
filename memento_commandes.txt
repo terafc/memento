@@ -64,7 +64,7 @@ Syntaxe:
 cp fichier1 /répertoire1 # copie le fichier 1 dans le répertoire1
 cp /répertoire1 répertoire2/ # copie le répertoire1 dans le répertoire2 ( ATTENTION "/" à la fin)
 Utile:
-cp -i # Demande une confirmation avant d'écraser s'il éxiste un fichier ou répertoire de même nom
+cp -i # Demande une confirmation avant d'écraser s'il existe un fichier ou répertoire de même nom
 cp -a # copie en gardant les droits,propriétaire,dates
 cp -R #copie récursivement ( grâce a cette commande on peut copier un fichier sous un autre nom)
 
@@ -178,6 +178,13 @@ Syntaxe :
 ln source destination
 ln -s /opt/lampp/lampp /usr/bin/lampp
 # crée un lien symbolique du fichier lampp dans le repertoire /opt/lampp vers le fichier lampp dans le répertoire /usr/bin/
+
+xargs
+xargs doit être suivie d'une commande (et de ses éventuelles arguments). L'action de xargs est de prendre tout ce qui lui vient en entrée standard, et de le rajouter comme des arguments supplémentaire à la commande qui le suit.. C'est un complement exellent des tunnels.
+
+Exemple:
+find ./ -name '*.png' | xargs rm # va mettre en argument de rm les résultats de la commande find, c'est à dire que tous les fichiers se terminant par .png vont etre supprimer
+
 
 
 ASTUCES
@@ -306,7 +313,7 @@ Si ce fichier n'existe pas il faudra le générer avec la commande :
 ssh-keygen -t rsa -C "your_email@youremail.com"
  permet de generer une clé pour votre adresse e-mail
 USAGE BASIQUE DES BRANCHES ET DES MERGES
-=============================
+========================================
 
 git branch nom_nouvelle_branche
 # Permet de crée une nouvelle branche
@@ -318,4 +325,25 @@ Il est alors conseillé de préciser lorsqu'on veut faire un push ou un pull que
 git push origin branch1
 git pull origin branch2
 
+
+
+Probleme réccurent UBUNTU
+=========================
+Résoudre probleme 
+"E: Impossible d'obtenir le verrou /var/lib/dpkg/lock - open (11: Ressource temporairement non disponible)
+E: Impossible de verrouiller le répertoire d'administration (/var/lib/dpkg/). Il est possible qu'un autre processus l'utilise"
+
+Utiliser l'une de ces commandes :
+sudo dpkg --configure -a
+sudo killall apt-get
+sudo rm -f /var/lib/apt/lists/lock
+
+
+
+*
+Résolution probleme de son simultané entre haut parleur et ecouteur portable TOSHIBA :
+Editer le fichier en root
+/etc/modprobe.d/alsa-base.conf 
+et ajouter cette ligne a la fin:
+options snd-hda-intel model=targa-dig
 
