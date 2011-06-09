@@ -210,6 +210,11 @@ str_replace : remplace un caractere (cherché) par une autre(donné) dans une ch
 str_suffle : mélange aléatoirement les caracteres d'un chaine
 strtolower : met tous les caracteres d'un chaine en minuscule
 strtoupper : met en majuscule
+date:permet d'afficher la la date courante
+ex: pour l'année==> date('Y')
+	pour le mois==>date('m')
+	pour l'heure==>date('H')
+	pour 
 
 
 Les tableaux :
@@ -220,6 +225,8 @@ Les tableaux :
 
 Tableau numérotés ==> array : variable tableau, c'est à dire qu'on peut stocker plusieur valeurs dans une variable
 Chaque valeur de l'array est numéroté à partir de 0 et commence toujours à partir de 0.
+
+Tableau associatifs==>Les tableaux associatifs fonctionnent sur le même principe, sauf qu'au lieu de numéroter les cases, on va les étiqueter en leur donnant à chacune un nom différent.
 
 Syntaxe :
 Construire un tableau numéroté
@@ -242,12 +249,42 @@ Faire appel une valeur ou plusieurs valeur de l'array
 	echo $var[2]; // pour afficher valeur3
 ?>
 
-Afficher toutes les valeurs d'un array
+Construire un tableau associatifs
+---------------------------------
+Syntaxe:
+
+<?php
+// On crée notre array $coordonnees
+$coordonnees = array (
+    'prenom' => 'François',
+    'nom' => 'Dupont',
+    'adresse' => '3 Rue du Paradis',
+    'ville' => 'Marseille');
+?>
+
+
+
+Afficher,parcourir toutes les valeurs d'un array
 ------------------------------------------------
+avec la boucle foreach:
 <?php 
 	$var=array ('valeur1', 'valeur2', 'valeur3', '....');
 	foreach( $var as $var2)
 	{
 	echo "$var2   ";
 	}
+?>
+
+ou avec print_r // affiche tous le contenu du tableau.
+
+<?php
+$coordonnees = array (
+    'prenom' => 'François',
+    'nom' => 'Dupont',
+    'adresse' => '3 Rue du Paradis',
+    'ville' => 'Marseille');
+
+echo '<pre>';
+print_r($coordonnees);
+echo '</pre>';
 ?>

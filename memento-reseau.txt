@@ -1,0 +1,499 @@
+
+ _______             ______   
+|__   __|             |   ____|  
+   | | ___ _ __ __ _|  |__ ___ 
+   | |/ _ \ '__/ _`   |    __ / __|
+   | |  __/ | | (_| | |   |   (  __ 
+   |_|\___|_|  \__,_|_ |    \___|
+                              
+                              
+===========================
+COMMANDE DE BASE EN RÉSEAUX
+===========================
+
+Afficher la table de routage :
+------------------------------
+Windows et Linux :
+netstat -r
+Cisco:
+show ip route
+
+Ajouter une route dans la table de routage:
+-------------------------------------------
+Windows et Linux: (sans les crochets)
+route add -net <@ Ip> netmask <le masque> gw <@ passerelle> interface <l'interface>
+
+Cisco:
+ip route <@ Ip> <le masque> <@ passerelle> int <interface>
+
+Supprimer une route dans la table de routage:
+--------------------------------------------
+Cisco:
+en mode conf:
+
+no ip route <@ip> <masque>
+
+Définir la passerlle par défaut:
+----------------------------------
+windows et Linux :
+route add -net 0.0.0.0 netmask 0.0.0.0 gw <@ passerelle>
+ou
+route add -net default gw <@ passerelle>
+
+Cisco:
+ip route 0.0.0.0 0.0.0.0 <@ passerelle>
+
+Suppimer une entrée dans la table de routage:
+---------------------------------------------
+Windows et Linux :
+route del -net <@ Ip> netmask <le masque> gw <@ passerelle> interface <l'interface>
+
+Cisco:
+no ip route 0.0.0.0 0.0.0.0 <@ IP>
+
+
+COMMANDE CONFIGURATION SWITCH CISCO:
+#######################################
+
+Activer le mode privilégié:
+-----------------------------
+enable
+
+Activer le mode configuration en mode privilégié:
+------------------------------------------------
+configure terminal
+
+Changer nom du switch en mode de configuration:
+------------------------------------------------
+hostname nom_voulu
+
+Configurer le mode de passe  pour le mode d'éxecution(en mode conf):
+---------------------------------------------------------------------
+enable secret mdp_voulu
+
+desactiver le DNS(en mode conf):
+---------------------------------
+no ip domain-lookup
+
+Configurer un mot  de passe pour les connexions console( en mode conf):
+-------------------------------------------------------------------------
+line console 0
+password mdp_voulu
+login
+
+Configurer un mot de passe pour les access Telnet vty( en mode conf):
+--------------------------------------------------------------------
+line vty 0 15
+password mdp_voulu
+login
+
+Sauvegarder la configuration(en mode priv):
+---------------------------------------------
+copy running-config startup-config
+
+Créer des VLANs:
+--------------------------
+en mode priv:
+
+vlan database
+vlan num_vlan ( ou éventuellement name nom_vlan_voulu)
+exit
+
+Attribuer une interface à un vlan
+------------------------------------
+en mode conf:
+interface <l'interface>
+switcport mode access
+switchport access vlan num_vlan
+end
+
+Attribuer une rangé d'interface à un vlan
+------------------------------------------
+en mode conf:
+interface range <les interfaces> 
+exemple : interface range fa0/1-15 pour les interface ethernet de 1  à 15, interface range fa0/1
+
+Attribuer une adresse ip a un vlan
+-----------------------------------
+interface vlan id_vlan
+ip adresse <@ip> <masque>
+
+Supprimer adresse ip d'un vlan ou d'une interface
+-------------------------------------------------
+interface <interface_id ou vlan_id>
+no ip address
+
+Mettre un interface en mode trunk:
+----------------------------------
+en mode conf:
+
+interface <l'interface>
+switchport mode trunk
+
+Affecter un vlan natif au port trunk ( peut etre entrer en meme temps que la config précédente)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+interface <interface_trunk>
+switchport trunk native vlan id_vlan_natif
+
+################################################
+#UN VLAN NATIF DOIT AVOIR AVOIR UNE ADRESSE IP #
+################################################
+
+Autoriser des vlans dans le trunk:
+----------------------------------
+en mode conf:
+interface <interface trunk>
+switchport trunk allowed vlan id_vlan,id_vlan,id_vlan
+
+VLAN DE GESTION :
+=================================================================================================================================================================================
+Pour pouvoir administrer un switch a distance (avec telnet ou ssh) grace a un vlan de gestion il faut:
+-mettre une @ip sur les vlan de gestions des switchs a gérer.
+-de mettre une adresse ip de passerelle sur les switchs a gérer.
+Cette  @ip doit correspondre à l'adresse ip du vlan de gestion sur lequelle est connecter le poste d'administration.
+Pour ajouter l'@ ip de la passerelle :
+(config)#ip default-gateway <l'@ du vlan gestion>
+-configurer les mots de passe vty
+-Ajouter une sous-interface et un addresse ip correspondant au vlan de gestion si un routeur est connecter
+
+===================================================================================================================================================================================
+
+Config VTP
+==========
+Vérifier status VTP:
+--------------------
+
+sh vtp status
+
+Changer le mode VTP :
+---------------------
+En mode conf:
+
+vtp mode <server|client|transparent>
+
+Mettre un switch dans un domaine VTP:
+--------------------------------------
+
+vtp domain <nom domaine>
+
+Configurer mot de passe VTP:
+----------------------------
+En mode conf:
+
+vtp password <mdp>
+
+Config STP
+===========
+Vérifier status STP:
+--------------------
+
+sh spanning-tree
+
+Config le pont racine primaire:
+-------------------------------
+En mode conf:
+
+spanning-tree vlan <id_vlan> root primary
+ 
+Config pont racine par la priorité BDU:
+----------------------------------------
+
+spanning-tree vlan <id_vlan> priority <num_priorité>
+ 
+Config le pont racine secondaire(de sauvegarde):
+------------------------------------------------
+
+spanning-tree vlan <id_vlan> secondary
+
+Config Port racine
+----------------------
+
+int <id_interface>
+spanning-tree cost <num_cost>
+
+cost:de 0 a 255
+
+config par vlan:
+----------------
+
+int <id_interface>
+spanning-tree vlan <id_vlan> port-priority  <num_priorité>
+
+
+COMMANDE CONFIGURATION ROUTEUR :
+###############################
+Arreter un processus :
+----------------------
+CTRL+SHIFT+6 OU CTRL+SHIFT+X
+
+Revenir en mode exec:
+---------------------
+CTRL+C OU CTRL+Z
+
+Commande show:
+--------------
+Afficher :
+La configuration courante:
+--------------------------
+
+sh running-config
+
+La configuration en mémoire:
+----------------------------
+
+sh startup-config
+
+La configuartion de l'interface:
+--------------------------------
+
+sh interface nom_interface
+
+Vue d'ensemble des interfaces:
+------------------------------
+
+sh ip interface brief
+
+Les tables de routage:
+----------------------
+sh ip route
+
+Le NAT:
+-------
+
+sh ip nat translations
+
+Les réservartion DHCP:
+----------------------
+
+sh ip dhcp binding
+
+Configuration des interfaces série d'un routeur
+------------------------------------------------
+Si un cable DCE ( ETCD) est connecté :
+---------------------------------------
+en mode config:
+interface se0/0/0
+ip address <@ip> <masque>
+clock rate 64000
+no shutdown
+exit
+
+Si un cable ETTD est connecté:
+--------------------------------
+en mode config:
+interface se0/0/0
+ip address <@ip> <masque>
+no shutdown
+
+Reconnaitre un cable DCE(ETCD) et cable ETTD:
+---------------------------------------------
+cable DCE==>male
+cable ETTD==>femelle
+
+
+Ajouter une adresse dans la table de routage:
+---------------------------------------------
+En mode conf:
+
+ip route <@ip> <masque> <passerelle>
+
+Ajouter une route par défaut:
+-----------------------------
+
+ip route 0.0.0.0 0.0.0.0 <@IP>
+
+Supprimer une entrée dans la table de routage:
+----------------------------------------------
+En mode conf:
+
+no ip route <@ip> <masque>
+
+Supprimer la table de routage:
+-------------------------------
+En mode conf:
+
+clear ip route
+
+Configuration interfaces et sous-interface
+------------------------------------------
+Interface:
+----------
+En mode conf:
+
+int <id_interface>
+
+Sous-interface:
+---------------
+En mode conf:
+
+int <id_interface.id_sous-interface>
+
+Configuration des access console et telnet:
+-------------------------------------------
+En mode conf:
+
+Utilisateur:
+------------
+username <nom> priv <niveau> secret 0 <pass>
+
+Access port console:
+--------------------
+line con 0
+
+Acces telnet:
+--------------
+line vty 0 4
+
+Configurer un mot de passe:
+---------------------------
+password
+
+Demander un login/mot de passe:
+-------------------------------
+
+login
+
+
+Configuration DHCP:
+=====================
+En mode conf :
+
+Activer/desactiver service DHCP:
+--------------------------------
+
+service dhcp
+
+no service dhcp
+
+Configuration:
+---------------------
+ip dhcp pool <nomPool>
+network <@ip> <masque>
+ip dhcp excluded-address <adrDebut> [adrFin]
+default-router <@Ip>   #route par defaut
+dns-server adrIP
+
+
+CONFIGURATION RESEAU LINUX:
+=====================
+
+Les fichiers de configuration:
+=================
+
+Des interfaces:
+-----------------------
+/etc/network/interfaces
+
+Syntaxe (contenu):
+------------------------------
+Pour la boucle réseau:
+----------------------------------
+#############
+auto lo
+iface lo inet loopback
+#############
+
+Pour les interfaces en dhcp
+-----------------------------------------
+#################
+auto eth0
+iface eth0 inet dhcp
+#################
+
+Pour les interfaces en static
+------------------------------------------
+###################
+auto eth0
+iface eth0 inet static
+	address <@Ip>
+	netmask <le_masque>
+	broadcast <@broadcast>
+###################
+
+Pour les sous-interfaces
+------------------------------------
+####################
+auto eth0.100
+iface eth0.100 dhcp
+
+auto eth0.200
+iface eth0.200 inet static
+	address 192.168.200.254
+	netmask 255.255.255.0
+	broadcast 192.168.200.255
+#####################
+
+Redemmarer interfaces:
+------------------------------------
+sudo /etc/init.d/networking restart
+
+
+DHCP:
+====
+/etc/dhcp/dhcpd.conf
+
+Il faut au préalable installer le packet : dhcp3-server
+
+Syntaxe:
+-------------
+################################
+subnet 192.168.1.0 netmask 255.255.255.0
+{
+	range 192.168.1.10 192.168.1.100;
+	range 192.168.1.150 192.168.1.200;
+	option routers 192.168.1.254;
+}
+
+
+subnet 192.168.200.0 netmask 255.255.255.0 
+{
+	range 192.168.200.1 192.168.200.253;
+	option routers 192.168.200.254;
+}
+
+################################
+
+
+Redémmarer DHCP:
+------------------------------
+sudo /etc/init.d/isc-dhcp-server restart
+
+ou 
+
+sudo /etc/init.d/dhcp3-server restart
+
+
+Configuration de Vlan et du 802.1q
+======================
+Il faut au préalable:
+
+*Vérifier si le module 8021q est présent dans le noyaux:
+--------------------------------------------------------------------------------------
+find /lib/modules/`uname -r` -name 8021q
+
+*Installer le packet "vlan":
+---------------------------------------
+sudo apt-get install vlan
+
+Charger le module:
+-----------------------------
+sudo modprobe 8021q
+
+Vérifier si le module est chargé:
+------------------------------------------------
+ps -ef | grep 8021q
+
+Configurer les interfaces correspondants aux vlans:
+===============================
+Ajouter les interfaces:
+----------------------------------
+vconfig add <id_interface> <vlan_id>
+
+Exemple: vconfig add eth0 10
+Correspond à la sous-interface eth0.10
+
+Supprimer les interfaces:
+-------------------------------------
+vconfig rem <id_interface>
+
+
