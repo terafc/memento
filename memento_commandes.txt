@@ -175,6 +175,7 @@ grep -l # affiche les noms des fichiers où figure au moins une fois le mot cher
 grep -L #affiche les noms des fichiers où ne figure pas le mot rechercher
 grep -mn # permet d'arreter la recherche apres avoir trouvé n ligne qui correspond à la recherche
 grep '\(mot1\|mot2\)' # cherche les caracteres mot1 et mot2 séparement
+grep -R # cherche récusivement dans le repertoire courant le critere recherché et donne le chemin
 
 cat
 -----
@@ -226,9 +227,14 @@ Utile:
 find
 ------
 Recherche des fichiers
+
 utile:
 -------
 find /tmp -name noyau -type f -print # affiche les fichiers qui s'appellent noyau dans le répertoire /tmp
+
+#-iname permet la meme chose que -name mais sera insensible à la casse
+#-atime : Recherche par date de dernier accès
+#-mtime : Recherche par date de dernière modification
 
 ln
 ---
@@ -243,7 +249,7 @@ ln -s /opt/lampp/lampp /usr/bin/lampp
 
 xargs
 ---------
-xargs doit être suivie d'une commande (et de ses éventuelles arguments). L'action de xargs est de prendre tout ce qui lui vient en entrée standard, et de le rajouter comme des arguments supplémentaire à la commande qui le suit.. C'est un complement exellent des tunnels.
+xargs doit être suivie d'une commande (et de ses éventuelles arguments). L'action de xargs est de prendre tout ce qui lui vient en entrée standard, et de le rajouter comme des arguments supplémentaire à la commande qui le suit.. C'est un complement exellent des tunnels/pipe !!.
 
 Exemple:
 --------------
@@ -333,7 +339,7 @@ git clone http://www.kernel.org/pub/scm/git/git.git
 ou en local
 git clone /home/terafc/todolist
 
-git clone --bare # l'option --bare permet de cloner un depot éxistant en considéranr le clone un dépot réferentiel nu.
+git clone --bare # l'option --bare permet de cloner un depot éxistant en considérant le clone un dépot réferentiel nu.
 
 Initialiser un depot:
 ------------------------
@@ -429,6 +435,7 @@ Editer le fichier en root
 et ajouter cette ligne a la fin:
 options snd-hda-intel model=targa-dig
 
+
 Proxy:
 --------
 Fichier de configuration:
@@ -438,5 +445,40 @@ Fichier de configuration:
 
 Syntaxe (contenu):
 -----------------------------
+
+
+Apache2:
+-------
+Dossier ou sont stocké/doit etre placé les pages :
+-------------------------------------------------
+/var/www
+
+Dossier de config de Apache2:
+----------------------------
+/etc/apache2/
+
+Fichier de config:
+------------------
+/etc/apache2/ports.conf
+
+/etc/apache2/sites-enabled/000-default
+
+Demarrer Apache2:
+----------------
+sudo /etc/init.d/apache2 start
+ou
+sudo service apache2 start
+
+Arreter Apache2:
+---------------
+sudo /etc/init.d/apache2 stop
+ou
+sudo service apache2 stop
+
+Redemarrer Apache2:
+-------------------
+sudo /etc/init.d/apache2 restart
+ou
+sudo service apache2 restart
 
 

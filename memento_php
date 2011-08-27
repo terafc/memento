@@ -1,10 +1,16 @@
 PHP
 ===
+
+
+
+
 Instruction php :
 <?php /*l'instruction*/   ?>
 
 Pour afficher du texte :
+------------------------
 echo
+
 Exemple:
 <?php echo "voici mon texte"  ?>
 print
@@ -17,7 +23,8 @@ Inclusion
 <?php include("mon_fichier_php_qui_contient_le_code_html.php")  ?>
 
 Les variables
-========
+=============
+
 Les types de variables:
 ------------------------------
 string : chaines de caracteres
@@ -43,9 +50,11 @@ int
 <?php $var=17;  ?>
 float
 <?php $var=17.7;  ?>
+
 booléen
 <?php $var=true; /*ou*/ $var2=false;  ?>
 NULL
+
 <?php $var=NULL;  ?>
 
 Afficher le contenu d'un variable
@@ -271,11 +280,14 @@ avec la boucle foreach:
 	$var=array ('valeur1', 'valeur2', 'valeur3', '....');
 	foreach( $var as $var2)
 	{
-	echo "$var2   ";
+	echo $var2."<br>";
 	}
 ?>
 
 ou avec print_r // affiche tous le contenu du tableau.
+
+Affichage pratique d'un tableau:
+--------------------------------
 
 <?php
 $coordonnees = array (
@@ -288,3 +300,6 @@ echo '<pre>';
 print_r($coordonnees);
 echo '</pre>';
 ?>
+
+
+
