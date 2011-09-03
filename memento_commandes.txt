@@ -175,6 +175,7 @@ grep -l # affiche les noms des fichiers où figure au moins une fois le mot cher
 grep -L #affiche les noms des fichiers où ne figure pas le mot rechercher
 grep -mn # permet d'arreter la recherche apres avoir trouvé n ligne qui correspond à la recherche
 grep '\(mot1\|mot2\)' # cherche les caracteres mot1 et mot2 séparement
+grep -R # cherche récusivement dans le repertoire courant le critere recherché et donne le chemin
 
 cat
 -----
@@ -229,6 +230,7 @@ Recherche des fichiers
 utile:
 -------
 find /tmp -name noyau -type f -print # affiche les fichiers qui s'appellent noyau dans le répertoire /tmp
+
 
 ln
 ---
@@ -333,7 +335,7 @@ git clone http://www.kernel.org/pub/scm/git/git.git
 ou en local
 git clone /home/terafc/todolist
 
-git clone --bare # l'option --bare permet de cloner un depot éxistant en considéranr le clone un dépot réferentiel nu.
+git clone --bare # l'option --bare permet de cloner un depot éxistant en considérant le clone un dépot réferentiel nu.
 
 Initialiser un depot:
 ------------------------

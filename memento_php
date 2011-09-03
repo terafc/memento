@@ -288,3 +288,6 @@ echo '<pre>';
 print_r($coordonnees);
 echo '</pre>';
 ?>
+
+
+
