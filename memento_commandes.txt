@@ -227,9 +227,34 @@ Utile:
 find
 ------
 Recherche des fichiers
+
 utile:
 -------
 find /tmp -name noyau -type f -print # affiche les fichiers qui s'appellent noyau dans le répertoire /tmp
+
+
+=======
+#-iname : permet la meme chose que -name mais sera insensible à la casse
+#-atime : Recherche par date de dernier accès
+#-mtime : Recherche par date de dernière modification
+#-type  : Recherche par type de fichier -type f pour des fichiers et -type d pour des répertoires
+
+xargs
+---------
+xargs doit être suivie d'une commande (et de ses éventuelles arguments). L'action de xargs est de prendre tout ce qui lui vient en entrée standard, et de le rajouter comme des arguments supplémentaire à la commande qui le suit.. C'est un complement exellent des tunnels/pipe !!.
+
+Exemple:
+--------------
+find ./ -name '*.png' | xargs rm # va mettre en argument de rm les résultats de la commande find, c'est à dire que tous les fichiers se terminant par .png vont etre supprimer
+
+Pour copier les occurences trouver:
+----------------------------------
+find . -iname le_fichier -type f -print0 | xargs -p -0 cp -t  /chemin/vers/repertoire/
+
+#-p       : rend xargs interactive , il faut repondre "y" pour confirmer
+#-iname   : permet d'ignorer la casse
+#-print 0 : permet d'affichier les occurences sur la meme ligne afin d'etre recuperer par xargs et etre copier 
+#-t       : permet de copier les occurences dans un repertoire
 
 
 ln
@@ -243,14 +268,53 @@ ln source destination
 ln -s /opt/lampp/lampp /usr/bin/lampp
 # crée un lien symbolique du fichier lampp dans le repertoire /opt/lampp vers le fichier lampp dans le répertoire /usr/bin/
 
-xargs
----------
-xargs doit être suivie d'une commande (et de ses éventuelles arguments). L'action de xargs est de prendre tout ce qui lui vient en entrée standard, et de le rajouter comme des arguments supplémentaire à la commande qui le suit.. C'est un complement exellent des tunnels.
+SSH
+---
+Connexion ssh:
+--------------
+ssh identifiant@adresseip
+
+ou
+ssh ssh identifiant@adresseip:22
 
 Exemple:
---------------
-find ./ -name '*.png' | xargs rm # va mettre en argument de rm les résultats de la commande find, c'est à dire que tous les fichiers se terminant par .png vont etre supprimer
+ssh terafc@172.15.68.20:22
 
+Connexion ssh avec session graphique
+-------------------------------------
+ssh -X id@adresse:port
+
+Connexion ssh avec attachement 
+------------------------------
+ssh identifiant@adresse
+screen
+
+Screen est un gestionnaire de fenetre (permet d'avoir  plusieur shell avec 1 seule session ssh) 
+
+Raccourcis et commande screen:
+------------------------------
+screen -r: récupere un screen
+
+ctrl+A D : se detacher d'un processus distant
+ctrl+A " : liste et permet de selectionne les processus/les fenetres screen en cours sur la machine distante
+ctrl+A c : crée une fenetre
+ctrl+A A :renomme fenetre actuelle
+
+
+Transfert de fichier avec SCP
+-----------------------------
+Transfert d'un serveur distant vers une destination locale
+-----------------------------------------------------------
+
+scp id@adresse:fichier /destination
+
+Transfert de locale vers serveur distant
+----------------------------------------
+
+scp fichier id@adresse:/rep1/rep2/
+Exemple:
+scp testcopy assos@assos.re:./
+Transfert le fichier testcopy dans le repertoire courant de assos.re
 
 
 ASTUCES
@@ -366,6 +430,17 @@ Exemple:
 --------------
 git commit -a -m "le_commentaire"
 
+
+git log
+#Donne la liste des commits
+
+git reset --hard HEAD
+#Permet de revenir au dernier commit
+HEAD^ : avant dernier commit
+HEAD^^ : avant avant dernier commit
+HEAD~n : n ieme commit
+
+
 Lorsqu'on veut envoyer les mises à jour apres un commit sur un serveur de depot on peut faire la commande:
 
 git push lien_vers_le_serveur
@@ -409,6 +484,29 @@ Il est alors conseillé de préciser lorsqu'on veut faire un push ou un pull que
 git push origin branch1
 git pull origin branch2
 
+
+##############
+UBUNTU       #
+##############
+
+Les paquets utiles :
+ubuntu-tweak
+super-boot-manager
+k3b //gravure
+apache2
+module php5
+mysql-server
+phpmyadmin
+gadmin-proftpd  //serveur ftp
+netbeans
+apatana
+codeblocks //IDE c++
+minicom //hyperterminal
+xinetd tftpd tftp //server tftp
+
+
+
+
 Probleme récurrent UBUNTU
 =================
 Message d'erreur :
@@ -431,14 +529,57 @@ Editer le fichier en root
 et ajouter cette ligne a la fin:
 options snd-hda-intel model=targa-dig
 
+
 Proxy:
 --------
 Fichier de configuration:
 ------------------------------------
 /etc/apt/apt.conf.d/proxy
+
 #Si le fichier n'existe pas, le crée.
 
 Syntaxe (contenu):
 -----------------------------
+Acquire::http::Proxy "http://utilisateur:motdepasse@example.com:port";
+
+Pour activer le proxy que dans la session:
+------------------------------------------
+export http_proxy=http://utilisateur:motdepasse@example.com:port
+
+
+
+Apache2:
+-------
+Dossier ou sont stocké/doit etre placé les pages :
+-------------------------------------------------
+/var/www
+
+Dossier de config de Apache2:
+----------------------------
+/etc/apache2/
+
+Fichier de config:
+------------------
+/etc/apache2/ports.conf
+
+/etc/apache2/sites-enabled/000-default
+
+Demarrer Apache2:
+----------------
+sudo /etc/init.d/apache2 start
+ou
+sudo service apache2 start
+
+Arreter Apache2:
+---------------
+sudo /etc/init.d/apache2 stop
+ou
+sudo service apache2 stop
+
+Redemarrer Apache2:
+-------------------
+sudo /etc/init.d/apache2 restart
+ou
+sudo service apache2 restart
 
 
