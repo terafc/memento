@@ -614,3 +614,38 @@ ou
 sudo service apache2 restart
 
 
+Ajouter des liens PPA dans debian :
+-----------------------------------
+Prérequis:
+add-apt-repository.sh
+
+Commande:
+---------
+cp add-apt-repository.sh /usr/sbin/add-apt-repository
+sudo chmod o+x /usr/sbin/add-apt-repository
+sudo chown root:root /usr/sbin/add-apt-repository
+sudo add-apt-repository ppa:ppa-name
+
+
+Ajouter une clé GPG ( due à Erreur de GPG ):
+--------------------------------------------
+gpg --recv-key code_erreur
+
+code_erreur étant les 8 derniers caractères du code fourni par le message d'erreur
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
