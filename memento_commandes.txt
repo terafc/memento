@@ -177,6 +177,28 @@ grep -mn # permet d'arreter la recherche apres avoir trouvé n ligne qui corresp
 grep '\(mot1\|mot2\)' # cherche les caracteres mot1 et mot2 séparement
 grep -R # cherche récusivement dans le repertoire courant le critere recherché et donne le chemin
 
+Recherche dans un texte avec grep:
+----------------------------------
+
+grep -R "mot" /rep1
+#Permet de rechercher le mot "mot" dans les fichiers du répertoire rep1
+
+Obtenir seulement les noms des fichiers qui contiennent le motif:
+grep -l motif fichiers
+
+Obtenir seulement les noms des fichiers qui ne contiennent pas le motif:
+grep -L motif fichiers
+
+Obtenir les lignes qui ne contiennent pas le motif:
+grep -v motif fichiers
+
+Chercher des lignes qui contiennent l'un ou l'autre des motifs fournis:
+grep 'motif1\|motif2' fichiers
+
+Faire apparaître le numéro de la ligne où figure le motif recherché :
+grep -n motif fichiers
+
+
 cat
 -----
 Affiche le contenu d'un fichier
@@ -194,6 +216,7 @@ Gestionnaire de processus
 Utile:
 -------
 top -u utilis1 #affiche les processus de l'utilisateur 'utilis1'
+
 
 cut
 -----
@@ -237,7 +260,15 @@ find /tmp -name noyau -type f -print # affiche les fichiers qui s'appellent noya
 #-iname : permet la meme chose que -name mais sera insensible à la casse
 #-atime : Recherche par date de dernier accès
 #-mtime : Recherche par date de dernière modification
+		-mtime 30 : le fichier a été modifié il y a 30 jours;
+		-mtime +30 : le fichier a été modifié il y a 30 jours ou plus;
+		-mtime -30 : le fichier a été modifié il y a 30 jours ou moins.
+#-newer : Recherche un fichier plus récent qu'un autre
+		Exemple:
+		find . -newer bofichier.tex -name '*.tex'
+		fichier d'extension .tex plus récent que le fichier bofichier.tex
 #-type  : Recherche par type de fichier -type f pour des fichiers et -type d pour des répertoires
+#-size  : Recherche par taille ( c : octet, k=kilo-octet)=> +nk superieur à n ko; -nk inferieur à n ko 
 
 xargs
 ---------
@@ -525,7 +556,7 @@ Résolution probleme de son simultané entre haut parleur et ecouteur portable T
 Editer le fichier en root
 -----------------------------------
 
-/etc/modprobe.d/alsa-base.conf 
+/etc/modprobe.d/alsa-base.conf gr
 et ajouter cette ligne a la fin:
 options snd-hda-intel model=targa-dig
 
