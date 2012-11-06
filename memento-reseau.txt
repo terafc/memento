@@ -1,15 +1,22 @@
 
  _______             ______   
-|__   __|             |   ____|  
-   | | ___ _ __ __ _|  |__ ___ 
-   | |/ _ \ '__/ _`   |    __ / __|
-   | |  __/ | | (_| | |   |   (  __ 
-   |_|\___|_|  \__,_|_ |    \___|
+|__   __|           |   ___|  
+   | | ___ _ __ __ _|  |__  ___ 
+   | |/ _ \ '__/ _`     __ / __|
+   | |  __/ | | (_| |  |  (  __ 
+   |_|\___|_|  \__,_|_ |   \___|
                               
                               
 ===========================
 COMMANDE DE BASE EN RÉSEAUX
 ===========================
+
+Changer adresse MAC sous linux:
+-------------------------------
+ifconfig INTERFACE down
+ifconfig INTERFACE hw ether @mac
+ifconfig INTERFACE up
+
 
 Afficher la table de routage :
 ------------------------------
@@ -154,7 +161,7 @@ Cette  @ip doit correspondre à l'adresse ip du vlan de gestion sur lequelle est
 Pour ajouter l'@ ip de la passerelle :
 (config)#ip default-gateway <l'@ du vlan gestion>
 -configurer les mots de passe vty
--Ajouter une sous-interface et un addresse ip correspondant au vlan de gestion si un routeur est connecter
+-Ajouter une sous-interface et une addresse ip correspondant au vlan de gestion si un routeur est connecter
 
 ===================================================================================================================================================================================
 
@@ -358,7 +365,7 @@ Configuration DHCP:
 =====================
 En mode conf :
 
-Activer/desactiver service DHCP:
+Activer/désactiver service DHCP:
 --------------------------------
 
 service dhcp
@@ -373,9 +380,56 @@ ip dhcp excluded-address <adrDebut> [adrFin]
 default-router <@Ip>   #route par defaut
 dns-server adrIP
 
+Sécurité:
+--------
+
+Génerer une paire de clé RSA:
+-----------------------------
+En mode conf:
+
+crypto key generate rsa
+
+Supprimer une paire de clé:
+---------------------------
+crypto key zeroize rsa
+
+SAUVEGARDER CONFIG ROUTEUR PAR TFTP:
+====================================
+
+http://www.cnrs.fr/aquitaine-limousin/Delegation/STI/Cours/ACL-Cisco/tftp.html
+
+Tout d'abord il faut un serveur TFTP si on est sur Windows :
+----------------------------------------------------------
+http://tftpd32.jounin.net/tftpd32_download.html
+en mode enable:
+
+Router1# write net 
+(On saisit ensuite l'adresse de l'hôte)
+(On sait ensuite le nom du fichier de conf[nom_du_cisco-config])
+Router1# quit.
+
+CHARGER LA CONFIG ROUTEUR:
+==========================
+
+en mode enable:
+
+Router1#conf network
+Host or network configuration file [host]? host  =>on choisit host
+This command has been replaced by the command:
+         'copy <url> system:/running-config'
+Address or name of remote host [255.255.255.255]? 192.168.30.2 => on saisit l'adresse de l'hôte
+Source filename [router1-confg]? save-router1-terafc => on saisit le nom du fichier de conf
+
+
+
+
+
+
+
+
 
 CONFIGURATION RESEAU LINUX:
-=====================
+==========================
 
 Les fichiers de configuration:
 =================
@@ -495,5 +549,43 @@ Correspond à la sous-interface eth0.10
 Supprimer les interfaces:
 -------------------------------------
 vconfig rem <id_interface>
+
+
+
+ROUTAGE DYNAMIQUE 
+==================
+RIP ne fonctionne pas avec du VLSM
+Sauf:
+-----
+RIPv2
+OSPF
+EIGRP
+IS-IS
+BGP
+
+Configuration RIP:
+------------------
+En mode conf
+
+#router rip
+network @IP #réseau dont on veut activer RIP
+network @IP
+
+
+Configuration RIPv2:
+-------------------
+#router rip
+network @IP #réseau dont on veut activer RIP
+network @IP
+version 2
+
+Activer l'IP classless
+----------------------
+conf t
+ip classless
+Interafce Passive:
+------------------
+En mode conf routeur
+passive-interface fa0/0
 
 
